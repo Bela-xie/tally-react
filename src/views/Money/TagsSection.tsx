@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import React from "react";
 import { useTags } from "hooks/useTags";
+import { NavLink } from "react-router-dom";
+import Icon from "components/Icon";
+
 const Wrapper = styled.section`
   background: #ffffff;
   padding: 12px 16px;
@@ -12,18 +15,26 @@ const Wrapper = styled.section`
   > ol {
     margin: 0 -12px;
     > li {
-      background: #d9d9d9;
+      background: #e2eaf1;
       border-radius: 18px;
       display: inline-block;
       padding: 3px 18px;
       font-size: 14px;
       margin: 8px 12px;
       &.selected {
-        background: #f60;
+        background: #456c8f;
+        color: white;
+        .icon {
+          fill: white;
+        }
+      }
+      >.icon{
+        margin-right:6px;
       }
     }
   }
-  > button {
+   button {
+    font-size: 12px;
     background: none;
     border: none;
     padding: 2px 4px;
@@ -38,7 +49,7 @@ type Props = {
   onChange: (value: number[]) => void;
 };
 const TagsSection: React.FC<Props> = (props) => {
-  const { tags, addTag } = useTags();
+  const { tags } = useTags();
   const selectedTagIds = props.value;
 
   const getClass = (tagId: number) => (selectedTagIds.indexOf(tagId) >= 0 ? "selected" : "");
@@ -54,11 +65,14 @@ const TagsSection: React.FC<Props> = (props) => {
       <ol>
         {tags.map((tag) => (
           <li key={tag.id} className={getClass(tag.id)} onClick={() => onToggleSelected(tag.id)}>
+            <Icon name="small-label"></Icon>
             {tag.name}
           </li>
         ))}
       </ol>
-      <button onClick={addTag}>新增标签</button>
+      <NavLink to="/tags">
+        <button>管理标签</button>
+      </NavLink>
     </Wrapper>
   );
 };

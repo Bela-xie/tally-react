@@ -2,6 +2,7 @@ import React from "react";
 import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Tags from "views/Tags";
 import Money from "views/Money";
+import Details from "views/Details";
 import Statistics from "views/Statistics";
 import NotFound from "views/NotFound";
 import styled from "styled-components";
@@ -21,6 +22,9 @@ function App() {
           </Route>
           <Route exact path="/tags/:id">
             <Tag />
+          </Route>
+          <Route exact path="/details">
+            <Details />
           </Route>
           <Route exact path="/money">
             <Money />

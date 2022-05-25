@@ -26,32 +26,32 @@ const Wrapper = styled.section`
         width: 50%;
       }
       &:nth-child(1) {
-        background: #f2f2f2;
+        background: #e2eaf1;
       }
       &:nth-child(2),
       &:nth-child(5) {
-        background: #e0e0e0;
+        background: #d4e0ea;
       }
       &:nth-child(3),
       &:nth-child(6),
       &:nth-child(9) {
-        background: #d3d3d3;
+        background: #c6d6e4;
       }
       &:nth-child(4),
       &:nth-child(7),
       &:nth-child(10) {
-        background: #c1c1c1;
+        background: #b9ccdd;
       }
       &:nth-child(8),
       &:nth-child(11),
       &:nth-child(13) {
-        background: #b8b8b8;
+        background: #abc2d6;
       }
       &:nth-child(12) {
-        background: #9a9a9a;
+        background: #8faec9;
       }
       &:nth-child(14) {
-        background: #a9a9a9;
+        background: #9db8d0;
       }
     }
   }

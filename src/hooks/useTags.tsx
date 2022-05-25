@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { createId } from "lib/createId";
 import { useUpdate } from "./useUpdate";
 
@@ -20,8 +20,8 @@ const useTags = () => {
   useUpdate(() => {
     localStorage.setItem("tag", JSON.stringify(tags));
   }, tags);
-  const findTag = (id: number) => tags.filter((tag) => tag.id === id)[0];
-  const findTagIndex = (id: number) => {
+  const findTag = useCallback((id: number) => tags.filter((tag) => tag.id === id)[0],[tags]);
+  const findTagIndex = useCallback((id: number) => {
     let result = -1;
     for (let i = 0; i < tags.length; i++) {
       if (tags[i].id === id) {
@@ -30,29 +30,29 @@ const useTags = () => {
       }
     }
     return result;
-  };
-  const updateTag = (id: number, { name }: { name: string }) => {
+  },[tags]);
+  const updateTag = useCallback((id: number, { name }: { name: string }) => {
     setTags(tags.map((tag) => (tag.id === id ? { id, name } : tag)));
-  };
+  },[tags]);
 
-  const deleteTag = (id: number) => {
+  const deleteTag = useCallback((id: number) => {
     setTags(tags.filter((tag) => tag.id !== id));
-  };
+  },[tags]);
 
-  const addTag = () => {
+  const addTag = useCallback(() => {
     const tagName = window.prompt("请输入你要添加的标签名");
     if (tagName) {
       setTags([...tags, { id: createId(), name: tagName }]);
     }
-  };
-  const getName = (id: number) => {
+  },[tags]);
+  const getName = useCallback((id: number) => {
     const tag = tags.filter((tag) => tag.id === id)[0];
     if (tag) {
       return tag.name;
     } else {
       return "";
     }
-  };
+  },[tags]);
   return { tags, getName, setTags, addTag, findTag, findTagIndex, updateTag, deleteTag }; //必须使用对象的形式导出，否则ts会报错
 };
 
